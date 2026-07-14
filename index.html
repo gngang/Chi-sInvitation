@@ -727,7 +727,7 @@
   const termBody = document.getElementById('termBody');
   const scrollHint = document.getElementById('scrollHint');
 
-  function typeLine(text, className, speed = 22) {
+  function typeLine(text, className, speed = 45) {
     return new Promise(resolve => {
       const line = document.createElement('div');
       line.className = 'term-line ' + (className || '');
@@ -756,7 +756,7 @@
         const gap = document.createElement('div');
         gap.style.height = '10px';
         termBody.appendChild(gap);
-        await new Promise(r => setTimeout(r, 180));
+        await new Promise(r => setTimeout(r, 380));
         continue;
       }
       if (item.type === 'cmd') {
@@ -767,22 +767,22 @@
         prompt.textContent = '$ ';
         wrap.appendChild(prompt);
         termBody.appendChild(wrap);
-        await typeLine(item.text, '', 20).then(() => {
+        await typeLine(item.text, '', 45).then(() => {
           const typed = termBody.lastElementChild;
           wrap.appendChild(document.createTextNode(typed.textContent));
           typed.remove();
         });
       } else {
-        await new Promise(r => setTimeout(r, 120));
+        await new Promise(r => setTimeout(r, 260));
         const out = document.createElement('div');
         out.className = 'term-line term-out ' + (item.cls || '');
         out.textContent = item.text;
         termBody.appendChild(out);
-        await new Promise(r => setTimeout(r, 260));
+        await new Promise(r => setTimeout(r, 500));
       }
     }
 
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, 600));
     const card = document.createElement('div');
     card.className = 'term-invite-card';
     card.innerHTML = '<div class="term-invite-title">✓ invitation.render() → success</div>' +
